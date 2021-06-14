@@ -12,9 +12,9 @@ def ex(x: Union[int, float]) -> float:
     :return: e^x value
     """
 
-    f = 1
+    f = 1 #factorial
     exp = 1
-    dx = x
+    dx = x #increment
     i = 1
     while dx > 0.0001:
         f *= i
@@ -31,10 +31,10 @@ def sinx(x: Union[int, float]) -> float:
     :param x: x value
     :return: sin(x) value
     """
-    f = 1
+    f = 1 #factorial
     st = 0
     i = 1
-    dx = x
+    dx = x #increment
     z = 1
     while dx > 0.0001:
         f *= (2 * i + 1) * 2 * i
