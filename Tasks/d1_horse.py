@@ -6,5 +6,25 @@ def calculate_paths(shape: (int, int), point: (int, int)) -> int:
     :param point: desired point for horse
     :return: count of paths from (1, 1) to (point[0], point[1]) (numerating from 0, so (0, 0) - left bottom tile)
     """
-    print(shape, point)
-    return 0
+    field = []
+    for j in range(shape[0]):
+        field_ = []
+        for i in range(shape[1]):
+            field_.append(0)
+        field.append(field_)
+
+    field[0][0] = 1
+
+    for i in range(shape[0]):
+        for j in range(shape[1]):
+            if field[i][j] != 0:
+                if i + 1 < shape[0] and j + 2 < shape[1]:
+                    field[i + 1][j + 2] += field[i][j] * 2
+                if i + 2 < shape[0] and j + 1 < shape[1]:
+                    field[i + 2][j + 1] += field[i][j] * 2
+                if i + 1 < shape[0] and j - 2 >= 0:
+                    field[i + 1][j - 2] += field[i][j] * 2
+                if i + 2 < shape[0] and j - 1 >= 0:
+                    field[i + 2][j - 1] += field[i][j] * 2
+
+    return field[point[0]][point[1]]
