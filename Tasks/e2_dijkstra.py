@@ -10,122 +10,30 @@ def dijkstra_algo(g: nx.DiGraph, starting_node: Hashable) -> Mapping[Hashable, U
     :param starting_node: starting node from g
     :return: dict like {'node1': 0, 'node2': 10, '3': 33, ...} with path costs, where nodes are nodes from g
     """
-    distance = {starting_node: 0}
     node_list = list(g.nodes)
+    distance = {node: float('inf') for node in node_list}
+    distance[starting_node] = 0
     weight = 'weight'
-
-    if starting_node in node_list:
-        node_list.remove(starting_node)
-
-
+    visited = [starting_node]
+    distance[starting_node] = 0
+    cur = 2
     node = starting_node
 
-    while node_list:
-        prev_dist = float('inf')
+    while cur < len(distance):
+        edge_list = {}
         for neighbour in g[node]:
-            distance[neighbour] = g[node][neighbour][weight]
-            if prev_dist > distance[node] + g[node][neighbour][weight]:
-                prev_dist = distance[starting_node] + g[node][neighbour][weight]
-                node = neighbour
-        node_list.remove(node)
-
+            if neighbour not in visited:
+                new_dist = distance[node] + g[node][neighbour][weight]
+                edge_list[neighbour] = new_dist
+            else:
+                continue
+        if len(edge_list) != 0:
+            neighbour = min(edge_list, key=edge_list.get)
+            distance[neighbour] = new_dist
+            visited.append(neighbour)
+            node_list.remove(neighbour)
+            node = neighbour
+        else:
+            node = visited[-cur]
+            cur += 1
     return distance
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
