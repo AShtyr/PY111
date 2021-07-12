@@ -11,8 +11,17 @@ def ex(x: Union[int, float]) -> float:
     :param x: x value
     :return: e^x value
     """
-    print(x)
-    return 0
+
+    f = 1 #factorial
+    exp = 1
+    dx = x #increment
+    i = 1
+    while dx > 0.0001:
+        f *= i
+        dx = x ** i / f
+        exp += dx
+        i += 1
+    return exp
 
 
 def sinx(x: Union[int, float]) -> float:
@@ -22,5 +31,15 @@ def sinx(x: Union[int, float]) -> float:
     :param x: x value
     :return: sin(x) value
     """
-    print(x)
-    return 0
+    f = 1 #factorial
+    st = 0
+    i = 1
+    dx = x #increment
+    z = 1
+    while dx > 0.0001:
+        f *= (2 * i + 1) * 2 * i
+        dx = x ** (2 * i + 1) / f
+        st += dx * z
+        i += 1
+        z *= -1
+    return x - st
